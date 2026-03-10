@@ -1,6 +1,4 @@
 import gc
-import clip
-import torch
 import numpy as np
 import requests
 import io
@@ -11,16 +9,15 @@ from ..config import ImageGenerationConfig
 class ImageService:
     def __init__(self, config: ImageGenerationConfig):
         self.config = config
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.clip_model = None
-        self.clip_preprocess = None
         self.api_host = "https://api.stability.ai"
 
     def load(self):
-        """Load CLIP để phân tích ảnh."""
-        print(f"Loading CLIP model for analysis on {self.device}...")
-        self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
+        """Khởi tạo dịch vụ ảnh (Lightweight - No CLIP needed)."""
         print(f"✓ Analysis tools ready (Using Stability AI Engine: {self.config.engine_id})")
+
+    def unload(self):
+        """Dọn dẹp bộ nhớ."""
+        gc.collect()
 
     def _call_stability_api(self, prompt: str, init_image: Image.Image = None, seed: int = 42) -> Image.Image:
         """Gọi Stability AI API (Text-to-Image hoặc Image-to-Image)."""
@@ -91,18 +88,16 @@ class ImageService:
         return result
 
     def get_stats(self, image: Image.Image):
-        img_tensor = torch.from_numpy(np.array(image)).float() / 255.0
-        if len(img_tensor.shape) == 3:
-            img_tensor = img_tensor.mean(dim=-1)
+        """Tính toán thống kê ảnh sử dụng NumPy (Lightweight)."""
+        img_array = np.array(image).astype(np.float32) / 255.0
+        if len(img_array.shape) == 3:
+            img_array = np.mean(img_array, axis=-1)
         return {
-            "mean": img_tensor.mean().item(),
-            "std": img_tensor.std().item(),
-            "max": img_tensor.max().item()
+            "mean": float(np.mean(img_array)),
+            "std": float(np.std(img_array)),
+            "max": float(np.max(img_array))
         }
 
     def unload(self):
-        if self.clip_model:
-            del self.clip_model
+        """Dọn dẹp bộ nhớ."""
         gc.collect()
-        if self.device == "cuda":
-            torch.cuda.empty_cache()
