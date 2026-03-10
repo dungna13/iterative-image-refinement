@@ -1,0 +1,244 @@
+id,prompt,iteration,clip_mean,clip_std,clip_max,issues,actions,refined_prompt,document
+gen_0,a photo of a cat,1,0.5688,0.2136,0.9961,"[Mean:0.5688 (Optimal), Std:0.2136 (High), Max:0.9961 (High)]","- Reduce global contrast to lower the maximum pixel intensity.
+- Apply a slight Gaussian blur or diffusion filter to reduce the standard deviation (spatial variance).
+- Adjust color curves to bring the mean slightly closer to the 0.45 center-point if necessary.","[A high-quality, soft-focus photo of a cat, balanced lighting, gentle contrast, natural color grading, cinematic composition with controlled highlights.]","DIAGNOSIS: [Mean:0.5688 (Optimal), Std:0.2136 (High), Max:0.9961 (High)]
+
+ACTIONS:
+- Reduce global contrast to lower the maximum pixel intensity.
+- Apply a slight Gaussian blur or diffusion filter to reduce the standard deviation (spatial variance).
+- Adjust color curves to bring the mean slightly closer to the 0.45 center-point if necessary.
+
+REFINED PROMPT: [A high-quality, soft-focus photo of a cat, balanced lighting, gentle contrast, natural color grading, cinematic composition with controlled highlights.]"
+gen_1,a photo of a dog,1,0.6986,0.2156,0.9856,"O, H, B","- Apply aggressive high-pass filtering to reduce overall brightness and contrast saturation.
+- Implement adaptive local contrast enhancement to normalize intensity distribution.
+- Apply a heavy gaussian blur or noise reduction pass to counteract the high standard deviation and peak pixel intensity.","A hyper-realistic, low-contrast, muted-tone photograph of a dog, soft focus, cinematic lighting, desaturated color palette, diffused natural shadows, shallow depth of field, high-end professional photography style.","DIAGNOSIS: O, H, B
+
+ACTIONS: 
+- Apply aggressive high-pass filtering to reduce overall brightness and contrast saturation.
+- Implement adaptive local contrast enhancement to normalize intensity distribution.
+- Apply a heavy gaussian blur or noise reduction pass to counteract the high standard deviation and peak pixel intensity.
+
+REFINED PROMPT: A hyper-realistic, low-contrast, muted-tone photograph of a dog, soft focus, cinematic lighting, desaturated color palette, diffused natural shadows, shallow depth of field, high-end professional photography style."
+gen_2,a photo of a horse,1,0.3608,0.191,0.9673,"mean(O), std(M), max(M)","- Increase contrast/brightness to shift mean higher (closer to the .62 threshold).
+- Apply localized sharpening or texture enhancement to increase std variance.
+- Retain current peak luminance levels, ensuring max remains below the .97 threshold to avoid clipping.","A high-contrast, sharp, detailed professional photograph of a horse, vibrant lighting, rich textures, balanced exposure, 8k resolution.","DIAGNOSIS: mean(O), std(M), max(M)
+
+ACTIONS:
+- Increase contrast/brightness to shift mean higher (closer to the .62 threshold).
+- Apply localized sharpening or texture enhancement to increase std variance.
+- Retain current peak luminance levels, ensuring max remains below the .97 threshold to avoid clipping.
+
+REFINED PROMPT: A high-contrast, sharp, detailed professional photograph of a horse, vibrant lighting, rich textures, balanced exposure, 8k resolution."
+gen_3,a photo of a laptop,1,0.5501,0.2118,1.0,"[mean:0.5501(U), std:0.2118(H), max:1.0000(B)]","- Increase contrast/brightness to shift mean higher (toward target range >.62).
+- Apply a slight blur or smoothing filter to decrease std (toward target range <.12).
+- Reduce highlights or clamping to decrease max (toward target range <.70).","[A high-quality, professional studio photograph of a sleek silver laptop, evenly lit with soft, diffused lighting to reduce harsh reflections, neutral background, moderate contrast, balanced exposure, 8k resolution, photorealistic.]","DIAGNOSIS: [mean:0.5501(U), std:0.2118(H), max:1.0000(B)]
+
+ACTIONS:
+- Increase contrast/brightness to shift mean higher (toward target range >.62).
+- Apply a slight blur or smoothing filter to decrease std (toward target range <.12).
+- Reduce highlights or clamping to decrease max (toward target range <.70).
+
+REFINED PROMPT: [A high-quality, professional studio photograph of a sleek silver laptop, evenly lit with soft, diffused lighting to reduce harsh reflections, neutral background, moderate contrast, balanced exposure, 8k resolution, photorealistic.]"
+gen_4,a photo of a chair,1,0.6167,0.1802,0.9935,"[O, M, B]","- Reduce exposure to shift the mean lower toward the target range.
+- Increase image contrast to reduce standard deviation.
+- Adjust brightness or highlight recovery to pull the maximum value below 0.97.","a photo of a chair, cinematic lighting, deep shadows, slightly desaturated, balanced exposure, high dynamic range with clamped highlights.","DIAGNOSIS: [O, M, B]
+
+ACTIONS:
+- Reduce exposure to shift the mean lower toward the target range.
+- Increase image contrast to reduce standard deviation.
+- Adjust brightness or highlight recovery to pull the maximum value below 0.97.
+
+REFINED PROMPT: a photo of a chair, cinematic lighting, deep shadows, slightly desaturated, balanced exposure, high dynamic range with clamped highlights."
+gen_5,a photo of a teddy bear,1,0.4481,0.2064,0.9791,"[mean:0.4481 (Optimal), std:0.2064 (Optimal), max:0.9791 (High)]","- Increase contrast or saturation to shift the distribution slightly toward the upper bound if the image appears flat.
+- Apply a slight sharpening filter or local contrast enhancement to balance the peak intensity value.
+- Introduce subtle texture-heavy background elements to stabilize the standard deviation.","[a high-resolution studio photograph of a plush teddy bear, soft cinematic side-lighting, macro focus on fuzzy fur texture, vibrant color grading, clean minimalist background, 8k, photorealistic]","DIAGNOSIS: [mean:0.4481 (Optimal), std:0.2064 (Optimal), max:0.9791 (High)]
+
+ACTIONS:
+- Increase contrast or saturation to shift the distribution slightly toward the upper bound if the image appears flat.
+- Apply a slight sharpening filter or local contrast enhancement to balance the peak intensity value.
+- Introduce subtle texture-heavy background elements to stabilize the standard deviation.
+
+REFINED PROMPT: [a high-resolution studio photograph of a plush teddy bear, soft cinematic side-lighting, macro focus on fuzzy fur texture, vibrant color grading, clean minimalist background, 8k, photorealistic]"
+gen_6,a photo of a bottle,1,0.5159,0.2847,1.0,"U, H, B","- Increase brightness and contrast levels to push the mean toward the optimal range.
+- Apply a noise reduction filter to decrease the standard deviation.
+- Adjust the white point or dynamic range compression to bring the maximum value below the threshold.","A professional, high-key studio photograph of a glass bottle on a neutral background, soft diffused lighting, balanced exposure, 8k resolution, clean composition, minimal highlights.","DIAGNOSIS: U, H, B
+
+ACTIONS: 
+- Increase brightness and contrast levels to push the mean toward the optimal range.
+- Apply a noise reduction filter to decrease the standard deviation.
+- Adjust the white point or dynamic range compression to bring the maximum value below the threshold.
+
+REFINED PROMPT: A professional, high-key studio photograph of a glass bottle on a neutral background, soft diffused lighting, balanced exposure, 8k resolution, clean composition, minimal highlights."
+gen_7,a photo of a car,1,0.5056,0.2266,1.0,"U, H, B","- Increase brightness and contrast to normalize mid-tone distribution (Mean shift).
+- Apply localized sharpening and edge enhancement to correct high standard deviation/noise (Std adjustment).
+- Apply a highlight recovery filter or luminosity mask to cap the excessive peak brightness (Max clipping).","A detailed, high-dynamic-range photograph of a car, balanced exposure, professional studio lighting, sharp focus on body contours, neutral color grading, 8k resolution.","DIAGNOSIS: U, H, B
+
+ACTIONS:
+- Increase brightness and contrast to normalize mid-tone distribution (Mean shift).
+- Apply localized sharpening and edge enhancement to correct high standard deviation/noise (Std adjustment).
+- Apply a highlight recovery filter or luminosity mask to cap the excessive peak brightness (Max clipping).
+
+REFINED PROMPT: A detailed, high-dynamic-range photograph of a car, balanced exposure, professional studio lighting, sharp focus on body contours, neutral color grading, 8k resolution."
+gen_8,a photo of a bird,1,0.4938,0.2789,1.0,"U, H, B","- Reduce exposure to shift mean towards the under-exposed range (<.28).
+- Increase contrast to tighten the standard deviation into the low-to-mid range (<.12).
+- Apply a highlight recovery mask or tone mapping to pull the maximum pixel value below the clipping threshold (<.70).","A professional wildlife photograph of a bird, low-key lighting, moody atmospheric shadows, high contrast, rich details, captured with a fast shutter speed to reduce motion blur, sharp focus on plumage, professional color grading with muted highlights.","DIAGNOSIS: U, H, B
+
+ACTIONS:
+- Reduce exposure to shift mean towards the under-exposed range (<.28).
+- Increase contrast to tighten the standard deviation into the low-to-mid range (<.12).
+- Apply a highlight recovery mask or tone mapping to pull the maximum pixel value below the clipping threshold (<.70).
+
+REFINED PROMPT: A professional wildlife photograph of a bird, low-key lighting, moody atmospheric shadows, high contrast, rich details, captured with a fast shutter speed to reduce motion blur, sharp focus on plumage, professional color grading with muted highlights."
+gen_9,a photo of a couch,1,0.5759,0.2107,0.9974,"[mean=0.5759 (O), std=0.2107 (H), max=0.9974 (B)]","- Increase contrast/exposure slightly to shift the mean toward the target range.
+- Decrease saturation or shadow intensity to reduce the standard deviation.
+- Apply a global highlight recovery or compression filter to pull the maximum value below the 0.97 threshold.","[A photo of a couch, balanced lighting, soft mid-tones, controlled highlights, natural color distribution, high dynamic range photograph]","DIAGNOSIS: [mean=0.5759 (O), std=0.2107 (H), max=0.9974 (B)]
+
+ACTIONS:
+- Increase contrast/exposure slightly to shift the mean toward the target range.
+- Decrease saturation or shadow intensity to reduce the standard deviation.
+- Apply a global highlight recovery or compression filter to pull the maximum value below the 0.97 threshold.
+
+REFINED PROMPT: [A photo of a couch, balanced lighting, soft mid-tones, controlled highlights, natural color distribution, high dynamic range photograph]"
+gen_10,a photo of a book,1,0.5805,0.1942,0.9817,"[mean=0.5805, std=0.1942, max=0.9817], [mean: U, std: H, max: B]","- Increase image exposure to shift mean towards the upper end (>0.62).
+- Decrease contrast to reduce standard deviation (<0.28).
+- Adjust lighting or angle to prevent specular highlights and bring maximum pixel intensity down (<0.70).","A high-key, evenly lit studio photograph of a book on a neutral surface, soft diffused lighting to minimize harsh shadows and high-contrast highlights, balanced exposure, matte texture.","DIAGNOSIS: [mean=0.5805, std=0.1942, max=0.9817], [mean: U, std: H, max: B]
+
+ACTIONS: 
+- Increase image exposure to shift mean towards the upper end (>0.62).
+- Decrease contrast to reduce standard deviation (<0.28).
+- Adjust lighting or angle to prevent specular highlights and bring maximum pixel intensity down (<0.70).
+
+REFINED PROMPT: A high-key, evenly lit studio photograph of a book on a neutral surface, soft diffused lighting to minimize harsh shadows and high-contrast highlights, balanced exposure, matte texture."
+gen_11,a photo of a refrigerator,1,0.5085,0.2188,1.0,"U, H, B","- Increase brightness/exposure to shift mean toward the target range.
+- Apply a slight blur or softening filter to reduce high-frequency contrast and lower the standard deviation.
+- Adjust global contrast curves to compress the highlights, bringing the max value down below 0.97.","A high-quality, professional photograph of a refrigerator in a softly lit, neutral-toned kitchen, balanced lighting, gentle shadows, cinematic composition, 8k resolution, realistic textures, moderate contrast.","DIAGNOSIS: U, H, B
+
+ACTIONS: 
+- Increase brightness/exposure to shift mean toward the target range.
+- Apply a slight blur or softening filter to reduce high-frequency contrast and lower the standard deviation.
+- Adjust global contrast curves to compress the highlights, bringing the max value down below 0.97.
+
+REFINED PROMPT: A high-quality, professional photograph of a refrigerator in a softly lit, neutral-toned kitchen, balanced lighting, gentle shadows, cinematic composition, 8k resolution, realistic textures, moderate contrast."
+gen_12,a photo of a clock,1,0.5445,0.3093,0.9974,"[mean:O, std:H, max:B]","- Reduce exposure/brightness to bring the mean into the optimal range (<0.62).
+- Apply a slight blur filter or reduce contrast to decrease the high standard deviation (>0.28).
+- Darken the image globally or mask the brightest highlights to lower the max intensity (>0.97).","[A moderately exposed, soft-focus, low-contrast photograph of a clock, muted color palette, avoiding extreme specular highlights, captured with a slightly diffused lighting effect.]","DIAGNOSIS: [mean:O, std:H, max:B]
+
+ACTIONS:
+- Reduce exposure/brightness to bring the mean into the optimal range (<0.62).
+- Apply a slight blur filter or reduce contrast to decrease the high standard deviation (>0.28).
+- Darken the image globally or mask the brightest highlights to lower the max intensity (>0.97).
+
+REFINED PROMPT: [A moderately exposed, soft-focus, low-contrast photograph of a clock, muted color palette, avoiding extreme specular highlights, captured with a slightly diffused lighting effect.]"
+gen_13,a photo of a bicycle,1,0.5508,0.2879,0.9935,"[mean=within, std=high, max=high]","- Reduce exposure to lower the overall brightness (mean).
+- Apply a high-pass filter or sharpen the image to reduce noise/blur contributing to the high standard deviation.
+- Adjust global contrast curves to pull the peak luminance values (max) back into the optimal range.","[A high-contrast professional photograph of a bicycle, balanced exposure, sharp focus, 8k resolution, neutral lighting, reduced highlights to prevent clipping, subtle texture enhancement.]","DIAGNOSIS: [mean=within, std=high, max=high]
+
+ACTIONS:
+- Reduce exposure to lower the overall brightness (mean).
+- Apply a high-pass filter or sharpen the image to reduce noise/blur contributing to the high standard deviation.
+- Adjust global contrast curves to pull the peak luminance values (max) back into the optimal range.
+
+REFINED PROMPT: [A high-contrast professional photograph of a bicycle, balanced exposure, sharp focus, 8k resolution, neutral lighting, reduced highlights to prevent clipping, subtle texture enhancement.]"
+gen_14,a photo of a backpack,1,0.5045,0.2185,0.902,"[mean:U, std:M, max:M]","- Increase contrast and brightness settings to shift intensity distribution.
+- Apply a high-pass filter or sharpen algorithm to enhance edge detection and texture clarity.
+- Adjust the histogram stretch to move the mean closer to the target range of 0.28–0.62.","A high-resolution, sharp photograph of a backpack, studio lighting, neutral background, enhanced contrast, crisp edges, clear details, optimal exposure.","DIAGNOSIS: [mean:U, std:M, max:M]
+
+ACTIONS:
+- Increase contrast and brightness settings to shift intensity distribution.
+- Apply a high-pass filter or sharpen algorithm to enhance edge detection and texture clarity.
+- Adjust the histogram stretch to move the mean closer to the target range of 0.28–0.62.
+
+REFINED PROMPT: 
+A high-resolution, sharp photograph of a backpack, studio lighting, neutral background, enhanced contrast, crisp edges, clear details, optimal exposure."
+gen_15,a photo of an umbrella,1,0.3186,0.2538,1.0,"U, L, B","- Increase global exposure to shift the mean into the range [0.28, 0.62].
+- Apply a slight contrast reduction or shadow lift to pull the standard deviation below 0.28.
+- Apply a highlight recovery or local tone mapping to bring the maximum intensity below 0.97.","A detailed, high-dynamic-range photograph of an umbrella, soft ambient lighting, balanced midtones, professional color grading, reduced specular highlights, cinematic composition.","DIAGNOSIS: U, L, B
+
+ACTIONS:
+- Increase global exposure to shift the mean into the range [0.28, 0.62].
+- Apply a slight contrast reduction or shadow lift to pull the standard deviation below 0.28.
+- Apply a highlight recovery or local tone mapping to bring the maximum intensity below 0.97.
+
+REFINED PROMPT: A detailed, high-dynamic-range photograph of an umbrella, soft ambient lighting, balanced midtones, professional color grading, reduced specular highlights, cinematic composition."
+gen_16,a photo of a pizza,1,0.36,0.2391,0.9987,"[mean:U, std:H, max:B]","- Increase brightness or contrast to shift the mean toward the optimal range.
+- Apply a noise reduction or smoothing filter to lower the standard deviation.
+- Adjust exposure or color curves to pull the maximum pixel values below the upper bound.","[A high-quality, professional food photography shot of a delicious pizza with balanced lighting, soft shadows, and vibrant colors, captured with moderate contrast and controlled highlights to ensure a natural look.]","DIAGNOSIS: [mean:U, std:H, max:B]
+
+ACTIONS:
+- Increase brightness or contrast to shift the mean toward the optimal range.
+- Apply a noise reduction or smoothing filter to lower the standard deviation.
+- Adjust exposure or color curves to pull the maximum pixel values below the upper bound.
+
+REFINED PROMPT: [A high-quality, professional food photography shot of a delicious pizza with balanced lighting, soft shadows, and vibrant colors, captured with moderate contrast and controlled highlights to ensure a natural look.]"
+gen_17,a photo of a cake,1,0.4637,0.2206,0.9987,"mean(N), std(N), max(H)","- Increase global contrast to bring the mean closer to the center range.
+- Apply a slight desaturation or shadow recovery to reduce the standard deviation.
+- Apply a ""levels"" or ""curves"" adjustment to pull the white point down (clipping the highlights) to bring the maximum value within the acceptable range.","A photo of a cake, soft natural lighting, high dynamic range with balanced midtones, neutral color grading, studio photography quality, avoiding overexposed highlights.","DIAGNOSIS: mean(N), std(N), max(H)
+
+ACTIONS:
+- Increase global contrast to bring the mean closer to the center range.
+- Apply a slight desaturation or shadow recovery to reduce the standard deviation.
+- Apply a ""levels"" or ""curves"" adjustment to pull the white point down (clipping the highlights) to bring the maximum value within the acceptable range.
+
+REFINED PROMPT: A photo of a cake, soft natural lighting, high dynamic range with balanced midtones, neutral color grading, studio photography quality, avoiding overexposed highlights."
+gen_18,a photo of a dog toy,1,0.5005,0.1739,0.9085,"[mean:O, std:H, max:M]","- Increase global contrast to shift mid-tone distribution toward the upper-bound targets.
+- Apply high-frequency sharpening to elevate the standard deviation.
+- Adjust exposure curves to push the peak highlights closer to the upper threshold (0.97).","[A high-contrast, sharp, professional product photography shot of a durable rubber dog toy, vibrant colors, clear textures, bright studio lighting, 8k resolution, detailed surface finish.]","DIAGNOSIS: [mean:O, std:H, max:M]
+
+ACTIONS:
+- Increase global contrast to shift mid-tone distribution toward the upper-bound targets.
+- Apply high-frequency sharpening to elevate the standard deviation.
+- Adjust exposure curves to push the peak highlights closer to the upper threshold (0.97).
+
+REFINED PROMPT: [A high-contrast, sharp, professional product photography shot of a durable rubber dog toy, vibrant colors, clear textures, bright studio lighting, 8k resolution, detailed surface finish.]"
+gen_19,a photo of a traffic light,1,0.3621,0.2786,1.0,"mean(U), std(H), max(B)","- Increase overall image exposure/brightness to shift mean higher.
+- Apply contrast reduction to tighten standard deviation.
+- Apply a slight negative vignette or color burn to the highlights to lower the maximum pixel intensity.","A high-key, soft-focus photograph of a traffic light, balanced exposure, muted highlights, flattened dynamic range to soften extreme brightness, professional studio lighting, 8k resolution.","DIAGNOSIS: mean(U), std(H), max(B)
+
+ACTIONS:
+- Increase overall image exposure/brightness to shift mean higher.
+- Apply contrast reduction to tighten standard deviation.
+- Apply a slight negative vignette or color burn to the highlights to lower the maximum pixel intensity.
+
+REFINED PROMPT: A high-key, soft-focus photograph of a traffic light, balanced exposure, muted highlights, flattened dynamic range to soften extreme brightness, professional studio lighting, 8k resolution."
+gen_20,a cat and a dog,1,0.6321,0.1787,0.9987,"Mean=O, Std=H, Max=B","- Increase subject descriptive density (breed, color, texture).
+- Introduce complex lighting/environment descriptors to calibrate statistical variance.
+- Shift composition from generic pairing to specific action-oriented interaction to manage outlier density.","A hyper-realistic, wide-angle cinematic shot of a ginger Maine Coon cat and a Golden Retriever sitting side-by-side on a sun-drenched velvet rug, detailed fur textures, soft golden hour lighting, 8k resolution, highly intricate background focus, sharp depth of field.","DIAGNOSIS: Mean=O, Std=H, Max=B
+
+ACTIONS:
+- Increase subject descriptive density (breed, color, texture).
+- Introduce complex lighting/environment descriptors to calibrate statistical variance.
+- Shift composition from generic pairing to specific action-oriented interaction to manage outlier density.
+
+REFINED PROMPT: A hyper-realistic, wide-angle cinematic shot of a ginger Maine Coon cat and a Golden Retriever sitting side-by-side on a sun-drenched velvet rug, detailed fur textures, soft golden hour lighting, 8k resolution, highly intricate background focus, sharp depth of field."
+gen_21,a laptop and a cup,1,0.3635,0.2498,1.0,"O, L, B","- Reduce global brightness to counteract overexposure (O).
+- Increase local contrast to compensate for low standard deviation (L).
+- Apply a high-pass filter or dynamic range compression to mitigate the maximum intensity clipping (B).","A crisp, balanced photograph of a laptop and a cup on a desk, soft natural lighting, high dynamic range, sharp details, neutral exposure, cinematic color grading.","DIAGNOSIS: O, L, B
+
+ACTIONS:
+- Reduce global brightness to counteract overexposure (O).
+- Increase local contrast to compensate for low standard deviation (L).
+- Apply a high-pass filter or dynamic range compression to mitigate the maximum intensity clipping (B).
+
+REFINED PROMPT: A crisp, balanced photograph of a laptop and a cup on a desk, soft natural lighting, high dynamic range, sharp details, neutral exposure, cinematic color grading."
+gen_22,a bicycle and a backpack,1,0.3658,0.1672,0.9974,"[mean:O, std:H, max:B]","- Increase contrast and saturation to boost lower-end feature activation.
+- Apply a high-pass filter or sharpen to enhance texture definition.
+- Re-segment the frame to isolate the bicycle and backpack, reducing background noise.
+- Normalize intensity levels to bring the mean into the optimal (.28-.62) range.","[A high-contrast, sharp-focus photographic composition of a bicycle parked on a city street with a hiking backpack secured to the frame, studio lighting, vivid colors, clear textures, 8k resolution, cinematic depth of field.]","DIAGNOSIS: [mean:O, std:H, max:B]
+
+ACTIONS:
+- Increase contrast and saturation to boost lower-end feature activation.
+- Apply a high-pass filter or sharpen to enhance texture definition.
+- Re-segment the frame to isolate the bicycle and backpack, reducing background noise.
+- Normalize intensity levels to bring the mean into the optimal (.28-.62) range.
+
+REFINED PROMPT: [A high-contrast, sharp-focus photographic composition of a bicycle parked on a city street with a hiking backpack secured to the frame, studio lighting, vivid colors, clear textures, 8k resolution, cinematic depth of field.]"
+gen_23,a horse and a person,1,0.4066,0.2688,0.9725,"O,H,B","- Reduce the overall brightness or intensity of the highlights to shift the mean lower.
+- Increase local contrast or sharpening to address the high standard deviation.
+- Apply a slight global darkening or vignette to bring the maximum pixel value below the 0.97 threshold.","A photo of a horse and a person, cinematic low-key lighting, balanced exposure with moderate contrast, subdued highlights, professional color grading, soft textures.","DIAGNOSIS: O,H,B
+
+ACTIONS:
+- Reduce the overall brightness or intensity of the highlights to shift the mean lower.
+- Increase local contrast or sharpening to address the high standard deviation.
+- Apply a slight global darkening or vignette to bring the maximum pixel value below the 0.97 threshold.
+
+REFINED PROMPT: A photo of a horse and a person, cinematic low-key lighting, balanced exposure with moderate contrast, subdued highlights, professional color grading, soft textures."

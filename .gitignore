@@ -27,6 +27,7 @@ output/
 
 # === Data (không commit dataset lớn) ===
 *.csv
+!dataset_final_v3.csv
 
 # === Jupyter ===
 .ipynb_checkpoints/
