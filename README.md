@@ -150,7 +150,7 @@ Create a `.env` file in the project root:
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
 STABILITY_API_KEY=your_stability_api_key_here
-GEMINI_MODEL=gemini-2.0-flash
+GEMINI_MODEL=gemini-2.0-flash ( or model llm you want)
 ```
 
 ### 3. Run the Server
