@@ -1,16 +1,19 @@
 # IRG-Thesis Dependencies
 
-torch>=2.0.0
-diffusers>=0.25.0
-clip @ git+https://github.com/openai/CLIP.git
+# --- AI APIs ---
 google-generativeai>=0.8.0
+requests
+
+# --- Vector RAG ---
+sentence-transformers>=2.7.0
+scikit-learn>=1.3.0
+
+# --- API Server ---
 fastapi
 uvicorn
 python-dotenv
-tqdm
+
+# --- Data & Image Processing ---
 Pillow>=10.0.0
 pandas>=2.0.0
 numpy>=1.24.0
-matplotlib>=3.7.0
-tqdm
-requests

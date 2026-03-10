@@ -1,41 +1,70 @@
-import pandas as pd
 import os
-from typing import List, Dict
+import logging
+import numpy as np
+import pandas as pd
+from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 class RAGService:
+    """
+    Retrieval-Augmented Generation service.
+    Uses semantic vector search (sentence-transformers) to find
+    historically similar cases from the dataset.
+    """
+    EMBED_MODEL = "all-MiniLM-L6-v2"
+
     def __init__(self, dataset_path: str, top_k: int = 3):
         self.dataset_path = dataset_path
         self.top_k = top_k
-        self.df = None
+        self.df: Optional[pd.DataFrame] = None
+        self.embeddings: Optional[np.ndarray] = None
+        self._encoder = None
 
     def load(self):
+        """Load dataset và pre-compute embeddings cho tất cả prompts."""
         if not os.path.exists(self.dataset_path):
-            print(f"⚠️ RAG Warning: Dataset not found at {self.dataset_path}. RAG will be disabled.")
+            logger.warning(f"RAG dataset not found at '{self.dataset_path}'. RAG disabled.")
             return
-        
+
         try:
+            # Lazy import để không cần cài nếu không dùng
+            from sentence_transformers import SentenceTransformer
+            from sklearn.metrics.pairwise import cosine_similarity as _cs
+            self._cosine_similarity = _cs
+
             self.df = pd.read_csv(self.dataset_path)
-            print(f"✓ RAG Service loaded: {len(self.df)} cases from {os.path.basename(self.dataset_path)}")
+            self._encoder = SentenceTransformer(self.EMBED_MODEL)
+
+            # Pre-compute embeddings 1 lần duy nhất khi startup
+            prompts = self.df['prompt'].fillna("").tolist()
+            self.embeddings = self._encoder.encode(prompts, show_progress_bar=False)
+
+            logger.info(f"RAG loaded: {len(self.df)} cases | model={self.EMBED_MODEL}")
+            print(f"✓ RAG Service loaded: {len(self.df)} cases (Vector Search enabled)")
+
+        except ImportError:
+            logger.warning("sentence-transformers not installed. Falling back to keyword search.")
+            self._encoder = None
+            if self.df is None:
+                self.df = pd.read_csv(self.dataset_path)
         except Exception as e:
-            print(f"❌ RAG Error loading dataset: {e}")
+            logger.error(f"RAG load error: {e}")
 
     def query(self, user_prompt: str) -> str:
         """
-        Tìm kiếm các trường hợp tương tự trong dataset và trả về ngữ cảnh (context).
-        Ở bản v1, ta dùng keyword matching đơn giản trên cột 'prompt'.
+        Tìm top-K trường hợp tương tự bằng semantic vector search.
+        Fallback sang keyword search nếu encoder chưa sẵn sàng.
         """
         if self.df is None or self.df.empty:
             return ""
 
-        # Keyword matching đơn giản (có thể nâng cấp lên Vector Search sau)
-        keywords = user_prompt.lower().split()
-        
-        # Tìm các dòng có chứa keyword
-        mask = self.df['prompt'].str.contains('|'.join(keywords), case=False, na=False)
-        similar_cases = self.df[mask].head(self.top_k)
+        if self._encoder is not None and self.embeddings is not None:
+            similar_cases = self._vector_search(user_prompt)
+        else:
+            similar_cases = self._keyword_search(user_prompt)
 
         if similar_cases.empty:
-            # Nếu không tìm thấy, lấy ngẫu nhiên 2 mẫu để Gemini tham khảo format
             similar_cases = self.df.sample(min(2, len(self.df)))
 
         context = "### HISTORICAL REFERENCE CASES (RAG)\n"
@@ -44,5 +73,18 @@ class RAGService:
             context += f"  ISSUES: {row['issues']}\n"
             context += f"  ACTIONS: {row['actions']}\n"
             context += f"  REFINED: {row['refined_prompt']}\n\n"
-        
+
         return context
+
+    def _vector_search(self, user_prompt: str) -> pd.DataFrame:
+        """Semantic search bằng cosine similarity trên embedding vectors."""
+        query_vec = self._encoder.encode([user_prompt])
+        scores = self._cosine_similarity(query_vec, self.embeddings)[0]
+        top_k_idx = scores.argsort()[::-1][:self.top_k]
+        return self.df.iloc[top_k_idx]
+
+    def _keyword_search(self, user_prompt: str) -> pd.DataFrame:
+        """Fallback: keyword matching nếu không có vector encoder."""
+        keywords = user_prompt.lower().split()
+        mask = self.df['prompt'].str.contains('|'.join(keywords), case=False, na=False)
+        return self.df[mask].head(self.top_k)
