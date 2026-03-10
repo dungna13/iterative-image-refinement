@@ -1,105 +1,120 @@
-# Qwen-IRG (V1) & Gemini-IRG (V2): Visual Reasoning and Autonomous Refinement for Image Generation
+# Modular Interleaving Reasoning-Generation (IRG) for Text-to-Image Synthesis
 
-## Project Overview
-
-This research project presents a comprehensive pipeline for enhancing image generation capabilities through the reasoning power of Large Language Models (LLMs). The project consists of two major phases:
-
-1. **V1.0 (Graduation Thesis - Qwen-IRG)**: A fine-tuned Qwen model (using LoRA/QLoRA) acting as an expert visual reasoning assistant, trained on a custom synthetic dataset to provide detailed visual reasoning, prompt refinement, and quality diagnostics.
-2. **V2.0 (Autonomous Architecture - Gemini-IRG)**: An evolution of the thesis work that introduces an Autonomous Multi-Agent workflow and Retrieval-Augmented Generation (RAG) using Gemini and Stability AI for a fully closed-loop self-correcting system.
-
-By integrating quantitative feature awareness (interpreting brightness, contrast, highlights) and multi-iteration reasoning, the system bridges the gap between user intent and generated image fidelity, offering robust corrective feedback on composition, lighting, style, and technical attributes.
+**An Academic Graduation Thesis Project**
 
 ---
 
-## 🔬 V1.0: Core Thesis Work (Qwen-IRG)
+## Abstract
 
-The foundation of this project is built upon fine-tuning open-source LLMs to mimic the critical eye of an art director or photographer.
+Recent advancements in Large Language Models (LLMs) and Latent Diffusion Models (LDMs) have revolutionized text-to-image generation. However, achieving high compositional accuracy and prompt adherence remains a significant challenge for single-shot diffusion models. This thesis introduces the **Modular Interleaving Reasoning-Generation (IRG)** framework, a multi-round, closed-loop pipeline that integrates an autonomous reasoning agent to evaluate, diagnose, and incrementally refine generated images. 
 
-### Key Innovations
-* **Synthetic Dataset Generation**: Developed a robust system for generating high-quality training data that includes multi-iteration refinement sequences, feature interpretation, and problem-solving scenarios (e.g., diagnosing underexposure).
-* **Feature-Aware Refinement**: Simulates a feedback loop where the LLM analyzes theoretical image features (derived from CLIP statistics) to propose concrete corrective actions.
-* **Fine-tuned Qwen Model**: Trained a specialized reasoning model (Qwen 2.5) using PEFT/LoRA to decompose constraints into granular visual prompts for SDXL.
+Developed originally as a graduation thesis utilizing fine-tuned open-source models (Phase 1), the system has since evolved into a fully autonomous Multi-Agent architecture bounded by Retrieval-Augmented Generation (Phase 2). By leveraging statistical image features as analytical feedback, the framework functions as an automated art director, resulting in quantifiable improvements in complex compositional tasks and overall aesthetic fidelity.
 
-### System Architecture
+---
+
+## 1. System Architecture & Methodology
+
+The core innovation of the IRG pipeline is the transition from zero-shot prompt execution to an iterative **Think → Generate → Reflect → Refine** feedback loop. To facilitate ongoing research, the repository maintains the codebase for both the foundational thesis implementation and its subsequent architectural evolution.
+
+### 1.1 Phase 1: The Thesis Implementation (Qwen-IRG)
+The academic foundation of this project involved fine-tuning a small-parameter LLM to perform complex visual diagnostics on consumer-grade hardware.
+* **Feature-Aware Diagnostics**: The system simulates multimodal understanding by translating CLIP-extracted feature statistics (mean, variance, highlights) into textual formatting that the LLM can interpret.
+* **Low-Rank Adaptation (LoRA)**: A Qwen-2.5 3B model was aggressively fine-tuned on a custom pipeline of 4,000 synthetic reasoning traces to master object decomposition, spatial reasoning, and attribute binding.
+* **Adaptive Denoising**: Implementing a dynamically decaying denoising schedule mapped with linearly increasing guidance scales to prevent over-refinement and semantic drift during the Image-to-Image inference phase.
+
 ![System Architecture](assets/system_architecture.png)
-*(Fig: The Interleaving Reasoning-Generation system architecture illustrating the iterative workflow)*
+*(Figure 1: The directed graphical model of the Interleaving Reasoning-Generation diffusion process, illustrating the deterministic multi-round feedback cycle.)*
 
-### Empirical Findings
-The modular reasoning approach was rigorously evaluated against standard single-shot generation (Base SDXL). The iterative loop consistently outperformed no-reasoning baselines:
+### 1.2 Phase 2: Autonomous Pipeline Evolution (Gemini-IRG)
+Following the completion of the thesis, the architecture was elevated to overcome the contextual limitations of small-parameter models:
+* **LLM Orchestration**: Transitioned the reasoning engine to Google's Gemini, introducing advanced heuristic parsing and regex-bound output schemas.
+* **Retrieval-Augmented Generation (RAG)**: Developed a historical retrieval service to inject successful textual refinement trajectories as grounded few-shot context, heavily stabilizing the corrective output.
 
-* **Compositional Accuracy**: The 2-iteration reasoning loop achieves a **+7.74% improvement** in compositional accuracy (from 0.3497 to 0.3768) compared to the zero-shot baseline.
-    ![Compositional Accuracy](assets/compositional_accuracy.png)
-* **Aesthetic Improvement**: The refinement process yields monotonic improvements in visual quality, increasing the aesthetic score by up to **+3.08%** over the base model.
-    ![Aesthetic Improvement](assets/aesthetic_improvement.png)
+---
 
-### Qualitative Examples
+## 2. Experimental Results and Evaluation
+
+The proposed framework was subjected to rigorous empirical evaluation across a stratified benchmark of compositionally demanding prompts (counting, spatial relations, attribute binding).
+
+### 2.1 Quantitative Analysis
+Performance was benchmarked against the standard single-point execution of Stable Diffusion XL. 
+* **Compositional Accuracy**: Under an object detection-based composite score, the 2-iteration interleaving reasoning loop achieved a maximal **+7.74% improvement** (from 0.3497 to 0.3768) over the base model.
+* **Visual Fidelity**: Contrary to the semantic alignment metric which experienced slight monotonic degradation due to successive denoising, human-aligned aesthetic scores exhibited a monotonic improvement, peaking at a **+3.08% enhancement** by the fourth iteration.
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="assets/compositional_accuracy.png" alt="Compositional Accuracy Chart" width="48%" />
+    <img src="assets/aesthetic_improvement.png" alt="Aesthetic Improvement Chart" width="48%" />
+</div>
+*(Figure 2: Empirical analysis of compositional accuracy (left) and aesthetic quality (right) across progressive refinement iterations.)*
+
+### 2.2 Qualitative Analysis
+Qualitative evaluation confirms the quantitative metrics, explicitly demonstrating the model's capacity to recognize attribute leakage prior to regeneration, specifically in counting tasks and spatial positioning.
+
 ![Counting Task](assets/counting_task.png)
-*(Fig: Visual comparison of precise counting task success achieved through iterative reasoning)*
+*(Figure 3: Multi-iteration structural correction, demonstrating successful counting logic resolution over progressive refinement cycles.)*
 
 ---
 
-## 🌟 V2.0: Autonomous Multi-Agent & RAG Architecture (Recent Evolution)
+## 3. Repository Organization
 
-To push the boundaries of traditional prompt engineering, the V1.0 concept was fundamentally re-architected into a **closed-loop autonomous system**:
+The repository is modularly structured to separate the Jupyter-based research environment from the productionized V2 architecture.
 
-* **Multi-Agent Workflow**: Moved away from static generation to a fully automated pipeline. The workflow automatically evaluates image statistics via `image_service` and feeds them to an `ExpertAgent` (Gemini) for dynamic, heuristic adjustments.
-* **Retrieval-Augmented Generation (RAG)**: Injects high-quality historical refinement cases as few-shot context to the LLM. Before generating a prompt, the system queries past successful cases to guide the Expert Agent's reasoning format and decision-making.
-* **Structured Heuristic Diagnostics**: Implemented strict Regex parsing to force the LLM to output predictable formats containing precise actionable steps (`Diagnosis -> Actions -> Refined Prompt`).
-
----
-
-## 📂 Repository Structure
-
-* **`Workflow-CODE/` (V1.0 - Thesis Fine-tuning & Data)**
-    * `irg-1-dataset-generation.ipynb`: Generates the comprehensive training dataset, simulating CLIP features.
-    * `irg-2-qwen-finetuning.ipynb`: Implements the fine-tuning pipeline for Qwen using PEFT/LoRA.
-    * `irg-imagegeneration.ipynb`: Demonstrates the baseline image generation process.
-    * `phase3-benchmark.ipynb`: Benchmarking suite to evaluate the model's improvement metrics via GenEval.
-    * `Final_check_2.pdf`: The complete thesis report documentation containing full methodology and experimental data.
-* **`src/` (V2.0 - Core Architecture)**
-    * `core/workflow.py`: The orchestrator handling the Multi-Agent loop and multi-iteration reasoning.
-    * `agents/expert_agent.py`: The Gemini LLM Agent enforcing heuristic rules for diagnostics and refinement.
-    * `services/rag_service.py`: Handles contextual data retrieval from historical runs (`dataset_final_v3.csv`).
-    * `services/image_service.py`: Evaluates and generates images using the Stability AI API.
-
-## 🛠️ Installation and Requirements
-
-### Prerequisites
-* Python 3.8 or higher
-* CUDA-compatible GPU (Recommended: NVIDIA T4 or better for V1.0 fine-tuning)
-* Valid API Keys for Gemini and Stability AI (for V2.0)
-
-### Dependencies
-Install the required packages based on the phase you are running:
-```bash
-# General / V2.0 Dependencies
-pip install google-generativeai requests pandas numpy pillow
-
-# V1.0 Fine-tuning Dependencies
-pip install torch transformers peft accelerate datasets
+```text
+IRG-Thesis/
+├── Workflow-CODE/                 # Academic Phase 1 (Data Synthesis & Training)
+│   ├── irg-1-dataset-generation.ipynb  # Synthetic reasoning data generation
+│   ├── irg-2-qwen-finetuning.ipynb     # PEFT/LoRA configuration and training
+│   ├── irg-imagegeneration.ipynb       # Baseline inference procedures
+│   ├── phase3-benchmark.ipynb          # GenEval benchmarking and metric calculation
+│   └── Final_check_2.pdf               # Complete official thesis documentation
+│
+├── src/                           # Production Phase 2 (Autonomous Multi-Agent)
+│   ├── core/workflow.py                # System orchestrator and cyclical control
+│   ├── agents/expert_agent.py          # LLM interface and diagnostic heuristics
+│   ├── services/rag_service.py         # Vector context retrieval
+│   └── services/image_service.py       # SDXL API execution and feature extraction
+│
+├── .gitignore
+├── requirements.txt
+└── main.py                        # Entry point for the Phase 2 autonomous pipeline
 ```
 
-## 🚀 Usage
+---
 
-### Phase 1: V1.0 Dataset Generation & Fine-tuning
-1. **Dataset Generation**: Run `Workflow-CODE/irg-1-dataset-generation.ipynb` to create the training dataset. The output is a JSON/CSV file containing the structured reasoning sequences.
-2. **Model Fine-Tuning**: Execute `Workflow-CODE/irg-2-qwen-finetuning.ipynb` to train the Qwen model. Ensure you have the base Qwen model downloaded. The script supports QLoRA for memory-efficient training on consumer GPUs.
-3. **Inference & Benchmarking**: Use `irg-imagegeneration.ipynb` and `phase3-benchmark.ipynb` to run the baseline evaluation suite.
+## 4. Setup and Reproduction Environment
 
-### Phase 2: V2.0 Autonomous Multi-Agent Generation
-1. Configure your `.env` file with your `GEMINI_API_KEY` and `STABILITY_API_KEY`.
-2. Ensure you have a valid RAG dataset (`dataset_final_v3.csv`) available.
-3. Run the application via the updated multi-agent orchestrator:
-   ```python
-   # Example usage using the V2.0 architecture
-   python main.py
-   ```
-   The `IRGWorkflow` will automatically retrieve historical RAG context, formulate an initial prompt, generate an image via Stability AI, extract its statistical properties, and iteratively refine it without human intervention.
+### 4.1 Prerequisites
+Experiments documented in this thesis were accelerated utilizing dual NVIDIA Tesla T4 GPUs on an Ubuntu 20.04.5 LTS environment, utilizing CUDA 12.1.
+* Python >= 3.10
+* PyTorch 2.1.0
 
-## 🙏 Acknowledgments
+### 4.2 Installation
+A virtual environment is strongly recommended.
+```bash
+# Clone the repository
+git clone https://github.com/[your-username]/IRG-Thesis.git
+cd IRG-Thesis
 
-This research makes use of the Qwen language model series by Alibaba Cloud and the PEFT library by Hugging Face. Special thanks to the open-source community for the tools enabling efficient LLM fine-tuning, and to FPT University for academic guidance.
+# Install core dependencies
+pip install -r requirements.txt
 
-## 📄 License
+# For Phase 1 (LoRA Fine-tuning) specific acceleration:
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install transformers peft accelerate datasets bitsandbytes
+```
 
-Copyright (c) 2025 Ngô Anh Dũng. This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. You may not use this work for commercial purposes.
+### 4.3 Execution Details
+* **Phase 1 Replication**: Proceed to `Workflow-CODE/` and execute sequence notebooks `1` through `3`. Ensure sufficient VRAM (16GB+) for 4-bit quantized Qwen-2.5-3B and FP16 SDXL coexistence.
+* **Phase 2 Execution**: Define `.env` with variables `GEMINI_API_KEY` and `STABILITY_API_KEY`. Execute `python main.py`.
+
+---
+
+## Acknowledgments
+
+This research implementation heavily references the mathematical foundations of Latent Diffusion Models and draws architectural inspiration from contemporary Interleaved Visual-Language frameworks. Special acknowledgment to FPT University for hardware provisions and faculty guidance.
+
+## Disclaimer & License
+
+This source code is provisioned for strictly academic, non-commercial research purposes under the Creative Commons Attribution-NonCommercial 4.0 International License.
+
+Copyright (c) 2025 Ngô Anh Dũng.
