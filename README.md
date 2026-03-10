@@ -6,6 +6,8 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688)](https://fastapi.tiangolo.com/)
 [![Gemini](https://img.shields.io/badge/LLM-Gemini%20API-4285F4)](https://ai.google.dev/)
 [![Stability AI](https://img.shields.io/badge/Image-Stability%20AI%20SDXL-blueviolet)](https://stability.ai/)
+[![Qwen](https://img.shields.io/badge/Phase1%20LLM-Qwen--2.5--3B-orange)](https://huggingface.co/Qwen/Qwen2.5-3B)
+[![SDXL Base](https://img.shields.io/badge/Phase1%20Image-stable--diffusion--xl--base--1.0-purple)](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 ---
