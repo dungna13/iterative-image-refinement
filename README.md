@@ -13,7 +13,7 @@
 
 ---
 
-## 📝 Abstract
+## Abstract
 
 Standard text-to-image models are single-shot systems — they generate an image and stop. **IRG** replaces that with an autonomous **Think → Generate → Critique → Refine** loop, where multiple AI agents collaborate to produce progressively higher-quality outputs.
 
@@ -23,7 +23,7 @@ The project has evolved through two phases:
 
 ---
 
-## 🎓 Phase 1: Academic Thesis (Qwen-IRG)
+## Phase 1: Academic Thesis (Qwen-IRG)
 
 The foundational research phase involved fine-tuning a small-parameter LLM to perform complex visual diagnostics on consumer-grade hardware.
 
@@ -40,7 +40,7 @@ The foundational research phase involved fine-tuning a small-parameter LLM to pe
 
 ---
 
-## 🚀 Phase 2: Production Multi-Agent System (Gemini-IRG)
+## Phase 2: Production Multi-Agent System (Gemini-IRG)
 
 The architecture was elevated to a fully autonomous multi-agent cloud API service, optimized for industrial deployment.
 
@@ -90,7 +90,7 @@ The architecture was elevated to a fully autonomous multi-agent cloud API servic
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```text
 IRG-Thesis/
 ├── src/
@@ -115,7 +115,7 @@ IRG-Thesis/
 
 ---
 
-## 🛠 Setup & Installation
+## Setup & Installation
 
 ### Option 1: Docker (Fastest & Cleanest) 🐳
 The project is fully containerized and published to the **GitHub Container Registry (GHCR)**.
@@ -158,7 +158,7 @@ Access the system at `http://localhost:8000/docs`.
 
 ---
 
-## 📡 API Documentation
+## API Documentation
 ### `POST /refine`
 Starts the multi-agent refinement loop.
 
@@ -177,7 +177,7 @@ Starts the multi-agent refinement loop.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 | Category | Technology |
 | :--- | :--- |
 | **Orchestration** | Python 3.11, FastAPI (Async) |
