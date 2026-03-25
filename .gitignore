@@ -1,49 +1,57 @@
-# === Secrets & Config ===
-.env
-*.env.*
+# ============================================================
+# IRG — .gitignore
+# ============================================================
 
-# === Python ===
+# Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-.Python
+*$py.class
 *.egg-info/
 dist/
 build/
 *.egg
+.eggs/
 
-# === Virtual Environments ===
+# Virtual environments
 venv/
 .venv/
 env/
-ENV/
 
-# === Output & Generated Files ===
-output/
-*.png
-*.jpg
-*.jpeg
+# Environment variables (API keys — NEVER push to GitHub)
+.env
 
-# === Data (không commit dataset lớn) ===
-*.csv
-!dataset_final_v3.csv
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
-# === Jupyter ===
-.ipynb_checkpoints/
-
-# === OS ===
+# OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# === Logs ===
+# Output & generated files
+output/
+outputs/
+
+# Logs
 *.log
-logs/
 
-# === IDE ===
-.vscode/
-.idea/
-*.swp
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
 
-# === Docs & Misc ===
-*.pdf
+# Docker
+docker-compose.override.yml
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Models (large files)
+*.bin
+*.safetensors
+*.pt
+*.onnx
