@@ -8,7 +8,7 @@
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-yellow)](https://huggingface.co/spaces)
 [![Python Version](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![LLM](https://img.shields.io/badge/LLM-Gemini_2.0_Flash-4285F4?logo=google-gemini&logoColor=white)](https://ai.google.dev/)
+[![LLM](https://img.shields.io/badge/LLM-Gemini_3.1_Flash_Lite-4285F4?logo=google-gemini&logoColor=white)](https://ai.google.dev/)
 [![Generation](https://img.shields.io/badge/Gen-SDXL_1.0-blueviolet)](https://stability.ai/)
 
 <br>
