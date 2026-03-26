@@ -23,20 +23,20 @@ https://github.com/user-attachments/assets/0182f60d-0d8b-4cdd-a648-3194bda74b92
 
 ---
 
-## 💡 The Value Proposition
+## The Value Proposition
 
 **The Problem:** Modern Text-to-Image (T2I) systems are "one-shot" black boxes. Users must manually guess new prompts when the output fails to match their intent or suffers from technical artifacts (overexposure, poor binding).
 
 **The Solution:** **IRG** introduces a **closed-loop feedback system**. Inspired by human artistic workflows, it employs a multi-agent hierarchy to perform autonomous **Think → Generate → Critique → Refine** cycles.
 
-### 🚀 Impact at a Glance
+### Impact at a Glance
 - ⚡ **Zero-Manual Prompting**: Describe once; let the agents handle the refinement.
 - 🎯 **Technical Precision**: Automatically fixes `Blown-Highs`, `Low-Contrast`, and `Semantic Drift`.
 - 🧠 **Context Awareness**: Uses RAG (Retrieval-Augmented Generation) to learn from the best historical prompt-engineering patterns.
 
 ---
 
-## 🎬 Real-World Case Studies
+## Real-World Case Studies
 
 IRG doesn't just generate images; it **reasons** about them. Below is the technical breakdown of autonomous sessions.
 
@@ -44,7 +44,7 @@ IRG doesn't just generate images; it **reasons** about them. Below is the techni
 > **Prompt:** *"futuristic cyberpunk city at night, neon reflections on wet streets"*
 
 <details>
-<summary><b>🧠 Full Agent Reasoning Log (Click to expand)</b></summary>
+<summary><b> Full Agent Reasoning Log (Click to expand)</b></summary>
 
 | Iteration | Status | Action |
 | :--- | :--- | :--- |
@@ -59,7 +59,7 @@ IRG doesn't just generate images; it **reasons** about them. Below is the techni
 > **Prompt:** *"a fluffy orange cat sitting on a windowsill, warm afternoon sunlight"*
 
 <details>
-<summary><b>🧠 Full Agent Reasoning Log (Click to expand)</b></summary>
+<summary><b> Full Agent Reasoning Log (Click to expand)</b></summary>
 
 | Iteration | Status | Operation |
 | :--- | :--- | :--- |
@@ -71,7 +71,7 @@ IRG doesn't just generate images; it **reasons** about them. Below is the techni
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 IRG is powered by a sophisticated multi-agent orchestrator:
 
@@ -92,11 +92,11 @@ graph TD
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 IRG is built for high-performance production environments.
 
-### 🐳 Option 1: Docker Compose (Recommended)
+### Option 1: Docker Compose (Recommended)
 ```bash
 git clone https://github.com/dungna13/iterative-image-refinement.git
 cd iterative-image-refinement
@@ -104,7 +104,7 @@ cp .env.example .env # Add your GEMINI_API_KEY and STABILITY_API_KEY
 docker compose up
 ```
 
-### 🐍 Option 2: Local Python Environment
+### Option 2: Local Python Environment
 ```bash
 pip install -r requirements.txt
 pip install gradio # For Web UI
@@ -113,7 +113,7 @@ python app_gradio.py
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 ### `POST /refine`
 Autonomous image refinement endpoint.
@@ -132,7 +132,7 @@ Autonomous image refinement endpoint.
 
 ---
 
-## 🔬 Research Foundation
+## Research Foundation
 
 IRG began as an academic thesis investigating the intersection of **Compositional Reasoning** and **Small-Parameter LLMs**.
 
@@ -143,7 +143,7 @@ IRG began as an academic thesis investigating the intersection of **Compositiona
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Core**: Python 3.11, FastAPI
 - **LLM**: Google Gemini 2.0 Flash Lite
@@ -153,7 +153,7 @@ IRG began as an academic thesis investigating the intersection of **Compositiona
 
 ---
 
-## 📜 License & Acknowledgments
+## License & Acknowledgments
 
 - Licensed under **CC BY-NC 4.0** (Non-Commercial Research).
 - Copyright © 2025 **Anh-Dung Ngo**.
