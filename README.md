@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/0182f60d-0d8b-4cdd-a648-3194bda74b92
 
 *(Watch IRG autonomously diagnose and fix lighting/composition issues in real-time)*
 
-[**Showcase**](#real-world-case-studies) • [**How it Works**](#system-architecture) • [**Quickstart**](#installation--setup) • [**Research**](#research-foundation)
+[**Showcase**](#showcase) • [**How it Works**](#architecture) • [**Quickstart**](#installation) • [**Research**](#research)
 
 </div>
 
@@ -37,7 +37,7 @@ https://github.com/user-attachments/assets/0182f60d-0d8b-4cdd-a648-3194bda74b92
 
 ---
 
-## 🏙️ Real-World Case Studies
+## <a id="showcase"></a>🏙️ Real-World Case Studies
 
 IRG doesn't just generate images; it **reasons** about them. Below is the technical breakdown of autonomous sessions.
 
@@ -72,7 +72,7 @@ IRG doesn't just generate images; it **reasons** about them. Below is the techni
 
 ---
 
-## ⚙️ System Architecture
+## <a id="architecture"></a>⚙️ System Architecture
 
 IRG is powered by a sophisticated multi-agent orchestrator:
 
@@ -93,7 +93,7 @@ graph TD
 
 ---
 
-## 🚀 Installation & Setup
+## <a id="installation"></a>🚀 Installation & Setup
 
 IRG is built for high-performance production environments.
 
@@ -133,7 +133,7 @@ Autonomous image refinement endpoint.
 
 ---
 
-## 📚 Research Foundation
+## <a id="research"></a>📚 Research Foundation
 
 IRG began as an academic thesis investigating the intersection of **Compositional Reasoning** and **Small-Parameter LLMs**.
 
