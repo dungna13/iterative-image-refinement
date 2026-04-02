@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/0182f60d-0d8b-4cdd-a648-3194bda74b92
 
 *(Watch IRG autonomously diagnose and fix lighting/composition issues in real-time)*
 
-[**Showcase**](#-real-world-case-studies) • [**How it Works**](#️-system-architecture) • [**Quickstart**](#-installation--setup) • [**Research**](#-research-foundation)
+[**Showcase**](#real-world-case-studies) • [**How it Works**](#system-architecture) • [**Quickstart**](#installation--setup) • [**Research**](#research-foundation)
 
 </div>
 
@@ -37,7 +37,7 @@ https://github.com/user-attachments/assets/0182f60d-0d8b-4cdd-a648-3194bda74b92
 
 ---
 
-## Real-World Case Studies
+## 🏙️ Real-World Case Studies
 
 IRG doesn't just generate images; it **reasons** about them. Below is the technical breakdown of autonomous sessions.
 
@@ -72,7 +72,7 @@ IRG doesn't just generate images; it **reasons** about them. Below is the techni
 
 ---
 
-## System Architecture
+## ⚙️ System Architecture
 
 IRG is powered by a sophisticated multi-agent orchestrator:
 
@@ -86,14 +86,14 @@ graph TD
     E -->|REFINE + Feedback| C
 ```
 
-1.  **ExpertAgent (Gemini 2.0)**: Acts as the Art Director. It translates mathematical image statistics into actionable prompt engineering.
+1.  **ExpertAgent (Gemini 3.1)**: Acts as the Art Director. It translates mathematical image statistics into actionable prompt engineering.
 2.  **ImageService (SDXL 1.0)**: The execution layer, performing both `Text-to-Image` and `Image-to-Image` refinements.
-3.  **CriticAgent (Gemini 2.0)**: The Quality Gate. It utilizes NumPy-derived statistical thresholds (mean, std, max) to decide if an image meets production standards.
+3.  **CriticAgent (Gemini 3.1)**: The Quality Gate. It utilizes NumPy-derived statistical thresholds (mean, std, max) to decide if an image meets production standards.
 4.  **RAG Service**: Provides the "Collective Memory", retrieving high-performing prompt structures from a vector database.
 
 ---
 
-## Installation & Setup
+## 🚀 Installation & Setup
 
 IRG is built for high-performance production environments.
 
@@ -114,7 +114,7 @@ python app_gradio.py
 
 ---
 
-## API Reference
+## 🛠️ API Reference
 
 ### `POST /refine`
 Autonomous image refinement endpoint.
@@ -133,7 +133,7 @@ Autonomous image refinement endpoint.
 
 ---
 
-## Research Foundation
+## 📚 Research Foundation
 
 IRG began as an academic thesis investigating the intersection of **Compositional Reasoning** and **Small-Parameter LLMs**.
 
@@ -144,7 +144,7 @@ IRG began as an academic thesis investigating the intersection of **Compositiona
 
 ---
 
-## Tech Stack
+## 💻 Tech Stack
 
 - **Core**: Python 3.11, FastAPI
 - **LLM**: Google Gemini 3.1 Flash Lite
@@ -154,7 +154,7 @@ IRG began as an academic thesis investigating the intersection of **Compositiona
 
 ---
 
-## License & Acknowledgments
+## 📜 License & Acknowledgments
 
 - Licensed under **CC BY-NC 4.0** (Non-Commercial Research).
 - Copyright © 2025 **Anh-Dung Ngo**.
